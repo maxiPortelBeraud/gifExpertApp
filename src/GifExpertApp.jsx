@@ -6,8 +6,12 @@ const GifExpertApp = () => {
 
   const onAddCategory = (newCategory) => {
     if (categories.includes(newCategory)) return;
-
     setCategories([newCategory, ...categories]);
+  };
+
+  const onRemoveCategory = (categoryToRemove) => {
+    if (categories.length <= 1) return;
+    setCategories(categories.filter((item) => item !== categoryToRemove));
   };
 
   return (
@@ -17,7 +21,11 @@ const GifExpertApp = () => {
       <AddCategory onNewCategory={onAddCategory} />
 
       {categories.map((category) => (
-        <GifGrid key={category} category={category} />
+        <GifGrid
+          key={category}
+          category={category}
+          onRemoveCategory={onRemoveCategory}
+        />
       ))}
     </>
   );
